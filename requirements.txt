@@ -1,0 +1,6 @@
+streamlit
+pandas
+requests
+curl_cffi
+plotly
+lxml
