@@ -53,7 +53,7 @@ def load_and_process_data():
     # 3. 获取 ETF (仅交易日)
     headers_soso = {"Accept": "application/json, text/plain, */*", "Content-Type": "application/json;charset=UTF-8", "Origin": "https://sosovalue.com", "Referer": "https://sosovalue.com/", "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36", "user-device": "Chrome/145.0.0.0#Mac OS/10.15.7"}
     
-    response = curl_requests.post("https://gw.sosovalue.com/finance/etf-statistics-do/findPage", headers=headers_soso, json={"pageNo": 1, "pageSize": 1000}, proxies=proxies, impersonate="chrome120", timeout=20)
+    response = curl_requests.post("https://gw.sosovalue.com/finance/etf-statistics-do/findPage", headers=headers_soso, json={"pageNo": 1, "pageSize": 1000}, impersonate="chrome120", timeout=20)
     df_etf = pd.DataFrame(json.loads(response.text, parse_float=Decimal)["data"]["list"])[['dataDate', 'totalNetInflow']]
     df_etf.columns = ['Date', 'ETF_Net_Inflow']
     df_etf['Date'] = pd.to_datetime(df_etf['Date']).dt.strftime('%Y-%m-%d')
